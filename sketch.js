@@ -16,7 +16,7 @@ function setup() {
 	angleMode(DEGREES)
 	rectMode(CENTER)
 	colorMode(HSB, 255, 100, 100)
-	noLoop()
+	// noLoop()
 
 	// sliders
 	createSliders()
@@ -42,7 +42,7 @@ function draw() {
 
 	for (let i = 0; i < repeat; i++) {
 		strokeWeight(sw)
-		drawDistance()
+		drawFlower()
 		rotate(angle)
 	}
 }
@@ -52,13 +52,19 @@ function doubleClicked() {
 	else loop()
 }
 
-function drawDistance() {
+function drawFlower() {
 	for (let i = 0; i <= 255; i += sliderDistance.value()) {
 		push()
 
-		let h = floor(map(sin(i * frameCount * 0.001), -1, 1, 10, 255))
-		let s = floor(map(cos(i * frameCount * 0.0001), -1, 1, 10, 100))
-		let b = floor(map(sin(i * frameCount * 0.002), -1, 1, 10, 100))
+		let h = floor(
+			map(sin((i * frameCount * sliderSpeed.value()) / 10000), -1, 1, 10, 255)
+		)
+		let s = floor(
+			map(cos((i * frameCount * sliderSpeed.value()) / 10000), -1, 1, 10, 100)
+		)
+		let b = floor(
+			map(sin((i * frameCount * sliderSpeed.value()) / 10000), -1, 1, 10, 100)
+		)
 		let a = map(i, 0, 255, 0.4, 0)
 
 		if (i % 2 > 0) {
